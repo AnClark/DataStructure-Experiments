@@ -129,6 +129,7 @@ status LinkedListClass::ListDelete(int i, ElemType & e)
     //Now let's delete
     q = p->next;
     p->next = q->next;
+    e=q->data;      // Dump the node's value to var "e"
     delete q;
     
     if(!q)
