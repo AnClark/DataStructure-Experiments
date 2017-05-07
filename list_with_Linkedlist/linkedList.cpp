@@ -16,11 +16,55 @@ status LinkedListClass::InitList(){
 
 
 status LinkedListClass::DestroyList(){
-    
+    Node *p, *q;    //p points to current node to operate, q points to node to delete.
 
+    // Init
+    p=LHead->next;
+
+    /******** STAGE 1: Delete nodes with data ********/
+    // METHOD: Scan a node, then remove it.
+    while(p->next != NULL)
+    {
+        q=p->next;
+        p->next=q->next;
+        delete q;
+    }
+
+    /******** STAGE 2: Delete header nodes ********/
+    delete LHead->next;
+    delete LHead;
+
+    // TODO: Fix incorrect return success level
+/**
+    if(!LHead)
+        return OK;
+    else
+        return ERROR;
+*/
 }
 
-status LinkedListClass::ClearList(){}
+status LinkedListClass::ClearList()
+{
+    Node *p, *q;    //p points to current node to operate, q points to node to delete.
+
+    // Init
+    p=LHead->next;
+
+    // Now let's clear list.
+    // METHOD: Scan a node, then remove it.
+    while(p->next != NULL)
+    {
+        q=p->next;
+        p->next=q->next;
+        delete q;
+    }
+
+    // Return success level
+    if(p->next == NULL)
+        return OK;
+    else
+        return ERROR;
+}
 
 
 bool LinkedListClass::ListEmpty()

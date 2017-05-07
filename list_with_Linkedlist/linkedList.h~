@@ -42,7 +42,7 @@ bool ListEmpty();
 int ListLength();
 
 status GetElem(int i,ElemType & e);
-Node LocateElem(ElemType e); //简化过
+int LocateElem(ElemType e); //简化过
 status PriorElem(ElemType cur, ElemType & pre_e);
 status NextElem(ElemType cur, ElemType & next_e);
 status ListInsert(int i, ElemType e);
@@ -52,6 +52,8 @@ status ListTrabverse();  //简化过
 // Extra features
 status PrintList();
 
+
+// Constructor & Deconstructor
 LinkedListClass(){
 	InitList();
 }

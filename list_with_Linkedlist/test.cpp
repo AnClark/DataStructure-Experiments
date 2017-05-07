@@ -41,7 +41,6 @@ int main()
 #endif
 
 
-#define TEST_FOR_LOCATEELEM
 
 #ifdef TEST_FOR_GETELEM
     cout<<"-------- NOW LET'S TEST GETELEM --------"<<endl;
@@ -72,6 +71,14 @@ int main()
             cout<<"NOT FOUND!";
     }
 #endif
+
+#ifdef TEST_FOR_CLEARLIST
+    cout<<"-------- LIST WILL BE CLEAR NOW --------"<<endl;
+    ll->ClearList();
+    
+    llState();
+#endif
+
 
     return 0;
 }

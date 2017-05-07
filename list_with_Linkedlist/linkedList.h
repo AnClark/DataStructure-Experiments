@@ -32,6 +32,7 @@ struct Node
 
 public:
 
+// Header Pointer
 Node *LHead;
 
 // Basic operation functions
@@ -52,6 +53,8 @@ status ListTrabverse();  //简化过
 // Extra features
 status PrintList();
 
+
+// Constructor & Deconstructor
 LinkedListClass(){
 	InitList();
 }
