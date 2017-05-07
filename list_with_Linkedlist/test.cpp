@@ -91,7 +91,8 @@ void llState()
     if(!ll->ListEmpty())
     {
         cout<<"Your linked list is:"<<endl;
-        ll->PrintList();
+        //ll->PrintList();
+        ll->ListTrabverse();
     }
 }
 

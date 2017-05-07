@@ -120,7 +120,7 @@ status LinkedListClass::GetElem(int i,ElemType & e)
 }
 
 
-int LinkedListClass::LocateElem(ElemType e) //简化过
+Node* LinkedListClass::LocateElem(ElemType e) //简化过
 //NOTICE: I directly return address value in int!
 //       G++ on Ubuntu 13.10 doesn't support treating a struct as return type!
 {
@@ -142,7 +142,7 @@ int LinkedListClass::LocateElem(ElemType e) //简化过
         return NULL;
 
     // Return target node's pointer if succeed
-    return (int) p;
+    return p;
 
 }
 
@@ -232,9 +232,6 @@ status LinkedListClass::ListDelete(int i, ElemType & e)
         return ERROR;
 }
 
-status LinkedListClass::ListTrabverse()  //简化过
-{}
-
 
 
 // Debug function: print out linked list
@@ -260,6 +257,12 @@ status LinkedListClass::PrintList()
     return OK;
 }
 
+
+status LinkedListClass::ListTrabverse()  //简化过
+/**** Actually, this function does the same as PrintList() ****/
+{
+    PrintList();
+}
 
 
 

@@ -21,14 +21,14 @@
 typedef int ElemType;
 typedef int status;
 
-class LinkedListClass
-{
-private:
 struct Node
 {
     ElemType data;
     Node *next;
 };
+
+class LinkedListClass
+{
 
 public:
 
@@ -43,7 +43,7 @@ bool ListEmpty();
 int ListLength();
 
 status GetElem(int i,ElemType & e);
-int LocateElem(ElemType e); //简化过
+Node* LocateElem(ElemType e); //简化过
 status PriorElem(ElemType cur, ElemType & pre_e);
 status NextElem(ElemType cur, ElemType & next_e);
 status ListInsert(int i, ElemType e);
