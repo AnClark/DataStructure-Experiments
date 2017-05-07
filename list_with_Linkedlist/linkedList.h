@@ -7,6 +7,7 @@
 */
 
 #include<stdio.h>
+#include<string.h>
 //#include<malloc.h>
 //#include<math.h>
 
@@ -30,8 +31,10 @@ struct Node
 };
 
 public:
+
 Node *LHead;
 
+// Basic operation functions
 status InitList();
 status DestroyList();
 status ClearList();
@@ -45,8 +48,11 @@ status ListInsert(int i, ElemType e);
 status ListDelete(int i, ElemType & e);
 status ListTrabverse();  //简化过
 
+// Extra features
+status PrintList();
+
 LinkedListClass(){
-//	InitList();
+	InitList();
 }
 
 ~LinkedListClass(){
@@ -54,3 +60,6 @@ LinkedListClass(){
 }
 
 };
+
+
+

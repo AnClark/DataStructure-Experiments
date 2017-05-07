@@ -1,8 +1,3 @@
-//Include iostream for debug only
-#include<iostream>
-using namespace std;
-//--------------------------------------
-
 #include "linkedList.h"
 
 status LinkedListClass::InitList(){
@@ -45,7 +40,7 @@ int LinkedListClass::ListLength()
 
     while(p != NULL){
         p=p->next;
-        i++;
+        len++;
     }
 
     return len;
@@ -62,21 +57,114 @@ status LinkedListClass::PriorElem(ElemType cur, ElemType & pre_e){}
 
 status LinkedListClass::NextElem(ElemType cur, ElemType & next_e){}
 
-status LinkedListClass::ListInsert(int i, ElemType e){}
 
-status LinkedListClass::ListDelete(int i, ElemType & e){}
+status LinkedListClass::ListInsert(int i, ElemType e)
+{
+    Node *p, *f;       //p points to current node to operate, f refers to new node.
+    int j = 0;        //Current ID of node
+
+    //Init
+    p=LHead->next;
+
+    /******** Situation 1: Insert into an empty list ********/
+    // If list is empty, force insert one node regardless of value of i
+    if(p->next == NULL)
+    {
+
+        f = new Node;
+        f->data = e;
+        f->next = p->next;
+        p->next = f;
+
+        goto exit;
+    }
+
+    /******** Situation 2: Insert into a non-empty list ********/
+
+    //Find somewhere to insert
+    while(p->next != NULL && j < i)
+    {
+        p=p->next;
+        j++;
+    }
+
+    //Return error if nowhere can insert
+    if(p->next == NULL)
+        return ERROR;
+
+    // Now let's insert
+    f = new Node;
+    f->data = e;
+    f->next = p->next;
+    p->next = f;
+
+exit:
+
+    if(f)
+        return OK;
+    else
+        return ERROR;
+}
+
+
+status LinkedListClass::ListDelete(int i, ElemType & e)
+{
+    Node *p, *q;    //p points to current node to operate, q points to node to delete.
+    int j = 0;    //Current ID of node
+
+    //Init
+    p=LHead->next;
+
+    //Find out the node to delete
+    while(p->next != NULL && j < i)
+    {
+        p=p->next;
+        j++;
+    }
+
+    //Return error if the node for delete not found
+    if(p->next == NULL)
+        return ERROR;
+
+    //Now let's delete
+    q = p->next;
+    p->next = q->next;
+    delete q;
+    
+    if(!q)
+        return OK;
+    else
+        return ERROR;
+}
 
 status LinkedListClass::ListTrabverse()  //简化过
 {}
 
 
-int main()
+
+// Debug function: print out linked list
+status LinkedListClass::PrintList()
 {
-    LinkedListClass *ll = new LinkedListClass();
+    Node *p;      //p points to current node to operate
+   
+    //Return error if linked list is empty
+    if(LHead->next->next == NULL)
+        return ERROR;
+ 
+    //Init
+    p=LHead->next->next;
 
-    int res = ll->InitList();
+    //Now let's print!
+    while(p != NULL){
+        cout<< p->data <<'\t';
+        p=p->next;
+    }
+    cout<<endl;
 
-    cout<<res;
-
-    return 0;
+    // Return OK if succeed
+    return OK;
 }
+
+
+
+
