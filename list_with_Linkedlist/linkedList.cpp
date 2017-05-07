@@ -47,11 +47,61 @@ int LinkedListClass::ListLength()
 }
 
 
-status LinkedListClass::GetElem(int i,ElemType & e){}
+status LinkedListClass::GetElem(int i,ElemType & e)
+{
+    Node *p;    //p points to current node to operate
+    int j = 0;        //Current ID of node
+
+    // Return error if list is empty
+    if(ListEmpty())
+        return ERROR;
+
+    // Init
+    p=LHead->next->next;
+
+    // Now let's find out the node!
+    while(p != NULL && j < i)
+    {
+        p=p->next;
+        j++;
+    }
+
+    // Return false if not found
+    if(p == NULL)
+        return FALSE;
+    
+    // Output target to var "e"
+    e = p->data;
+    return OK;
+}
 
 
-status LinkedListClass::LocateElem(ElemType e) //简化过
-{}
+int LinkedListClass::LocateElem(ElemType e) //简化过
+//NOTICE: I directly return address value in int!
+//       G++ on Ubuntu 13.10 doesn't support treating a struct as return type!
+{
+    Node *p;    //p points to current node to operate
+
+    // Return NULL pointer if list is empty
+    if(ListEmpty())
+        return ERROR;
+
+    // Init
+    p=LHead->next->next;
+
+    // Now let's find out the node!
+    while(p != NULL && p->data != e)
+        p=p->next;
+
+    // Return NULL pointer if not found
+    if(p == NULL)
+        return NULL;
+
+    // Return target node's pointer if succeed
+    return (int) p;
+
+}
+
 
 status LinkedListClass::PriorElem(ElemType cur, ElemType & pre_e){}
 
@@ -88,9 +138,9 @@ status LinkedListClass::ListInsert(int i, ElemType e)
         j++;
     }
 
-    //Return error if nowhere can insert
+    //Return false if nowhere can insert
     if(p->next == NULL)
-        return ERROR;
+        return FALSE;
 
     // Now let's insert
     f = new Node;
@@ -122,9 +172,9 @@ status LinkedListClass::ListDelete(int i, ElemType & e)
         j++;
     }
 
-    //Return error if the node for delete not found
+    //Return false if the node for delete not found
     if(p->next == NULL)
-        return ERROR;
+        return FALSE;
 
     //Now let's delete
     q = p->next;

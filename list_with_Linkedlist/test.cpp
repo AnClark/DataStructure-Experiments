@@ -23,7 +23,7 @@ int main()
     llState();
 
 
-    // TEST FOR REMOVE
+#ifdef TEST_FOR_REMOVE
     cout<<"-------- NOW LET'S TEST REMOVE --------"<<endl;
     cout<<"\t(-1 for EOL)"<<endl;
 
@@ -38,7 +38,40 @@ int main()
 
         llState();
     }
-    
+#endif
+
+
+#define TEST_FOR_LOCATEELEM
+
+#ifdef TEST_FOR_GETELEM
+    cout<<"-------- NOW LET'S TEST GETELEM --------"<<endl;
+    cout<<"\t(-1 for EOL)"<<endl;
+
+    while(cin>>i  &&  i != -1)
+    {
+        int res = ll->GetElem(i, d);
+
+        if(res == OK)
+            printf("Index %d => Value %d \n", i, d);
+        else if(res == ERROR)
+            ERROR_WARNING;
+    }
+#endif
+
+#ifdef TEST_FOR_LOCATEELEM
+    cout<<"-------- NOW LET'S TEST LOCATEELEM --------"<<endl;
+    cout<<"\t(-1 for EOL)"<<endl;
+
+    while(cin>>d  &&  d != -1)
+    {
+        int res = ll->LocateElem(d);
+
+        if(res)
+            printf("Value %d is on address %d \n", d, res);
+        else if(res == NULL)
+            cout<<"NOT FOUND!";
+    }
+#endif
 
     return 0;
 }

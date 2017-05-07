@@ -40,8 +40,9 @@ status DestroyList();
 status ClearList();
 bool ListEmpty();
 int ListLength();
+
 status GetElem(int i,ElemType & e);
-status LocateElem(ElemType e); //简化过
+Node LocateElem(ElemType e); //简化过
 status PriorElem(ElemType cur, ElemType & pre_e);
 status NextElem(ElemType cur, ElemType & next_e);
 status ListInsert(int i, ElemType e);
