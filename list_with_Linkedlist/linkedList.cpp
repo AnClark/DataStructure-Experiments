@@ -43,6 +43,7 @@ status LinkedListClass::DestroyList(){
 */
 }
 
+
 status LinkedListClass::ClearList()
 {
     Node *p, *q;    //p points to current node to operate, q points to node to delete.
@@ -182,6 +183,7 @@ status LinkedListClass::PriorElem(ElemType cur, ElemType & pre_e)
     
 }
 
+
 status LinkedListClass::NextElem(ElemType cur, ElemType & next_e)
 {
     Node *p;    //p points to current node to operate
@@ -298,7 +300,6 @@ status LinkedListClass::ListDelete(int i, ElemType & e)
     else
         return ERROR;
 }
-
 
 
 // Debug function: print out linked list
