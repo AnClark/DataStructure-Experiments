@@ -147,9 +147,76 @@ Node* LinkedListClass::LocateElem(ElemType e) //简化过
 }
 
 
-status LinkedListClass::PriorElem(ElemType cur, ElemType & pre_e){}
+status LinkedListClass::PriorElem(ElemType cur, ElemType & pre_e)
+{
+    Node *p;    //p points to current node to operate
+    pre_e = 0;
 
-status LinkedListClass::NextElem(ElemType cur, ElemType & next_e){}
+    // Return ERROR if linked list is empty
+    if(ListEmpty())
+        return ERROR;
+
+    // Init
+    p=LHead->next;
+
+    // Find out the target node "cur"
+    while(p->next != NULL && p->next->data != cur)
+        p=p->next;
+
+    // Return ERROR if not found
+    if(p->next == NULL)
+        return ERROR;
+
+
+    // Check if target node not the first node
+    if(p != LHead->next)
+    {
+        pre_e = p->data;
+        return OK;
+    }
+    else
+    {
+        pre_e = 0;
+        return FALSE;
+    }
+    
+}
+
+status LinkedListClass::NextElem(ElemType cur, ElemType & next_e)
+{
+    Node *p;    //p points to current node to operate
+    next_e = 0;
+
+    // Return ERROR if linked list is empty
+    if(ListEmpty())
+        return ERROR;
+
+    // Init
+    p=LHead->next->next;
+
+    // Find out the target node "cur"
+    while(p != NULL && p->data != cur)
+        p=p->next;
+
+
+    // Return ERROR if not found
+    if(p == NULL)
+        return ERROR;
+
+
+    // Check if target node not the first node
+    if(p->next != NULL)
+    {
+        next_e = p->next->data;
+        return OK;
+    }
+    else
+    {
+        next_e = 0;
+        return FALSE;
+    }
+    
+}
 
 
 status LinkedListClass::ListInsert(int i, ElemType e)

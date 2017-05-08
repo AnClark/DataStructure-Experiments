@@ -8,6 +8,8 @@ LinkedListClass *ll = new LinkedListClass();
 void llState();
 #define ERROR_WARNING cout<<"*** ERROR OCCURRED ***"<<endl
 
+#define TEST_FOR_NEXTELEM
+
 // For debug
 int main()
 {
@@ -77,6 +79,39 @@ int main()
     ll->ClearList();
     
     llState();
+#endif
+
+#ifdef TEST_FOR_PRIORELEM
+    cout<<"-------- NOW LET'S TEST PRIORELEM --------"<<endl;
+    cout<<"\t(-1 for EOL)"<<endl;
+
+    while(cin>>d  &&  d != -1)
+    {
+        int res;
+        ll->PriorElem(d, res);
+
+        if(res)
+            printf("Value %d 's prior is %d \n", d, res);
+        else if(res == NULL)
+            cout<<"*** Not found or ON HEAD!"<<endl;
+    }
+#endif
+
+
+#ifdef TEST_FOR_NEXTELEM
+    cout<<"-------- NOW LET'S TEST NEXTELEM --------"<<endl;
+    cout<<"\t(-1 for EOL)"<<endl;
+
+    while(cin>>d  &&  d != -1)
+    {
+        int res;
+        ll->NextElem(d, res);
+
+        if(res)
+            printf("Value %d 's next is %d \n", d, res);
+        else if(res == NULL)
+            cout<<"*** Not found or ON TAIL!"<<endl;
+    }
 #endif
 
 
