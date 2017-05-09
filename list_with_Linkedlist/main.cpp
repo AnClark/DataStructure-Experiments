@@ -106,7 +106,7 @@ int main(void){
 		 cout<<"----需要查询哪个元素的后继节点？在此输入：\t"<<endl;
 		 scanf("%d", &i);
 		 
-                 if(ll->PriorElem(i, res) == OK)
+                 if(ll->NextElem(i, res) == OK)
 		 	printf("\n----元素 %d 的后继结点值为 %d\n", i, res);     
 		 else
 			printf("\n----操作失败，该元素不在链表中，或为最后一个结点！\n");
@@ -164,5 +164,4 @@ int main(void){
 
   return 0;
 }//end of main()
-
 
