@@ -263,7 +263,7 @@ status LinkedListClass::ListInsert(int i, ElemType e)
 
 exit:
 
-    if(f)
+    if(p->next != NULL)
         return OK;
     else
         return ERROR;

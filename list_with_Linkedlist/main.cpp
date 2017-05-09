@@ -11,7 +11,12 @@ using namespace std;
 int main(void){
   LinkedListClass *ll = new LinkedListClass();
 
-  int i, res;
+  // Vars for screen input.
+  // i - Index of node in linked list
+  // d - Node data
+  // res - Result or status value of function
+  int i, d, res = 0;
+  bool isEmptyAtFirst;		
 
   int op=1;
   while(op){
@@ -65,23 +70,30 @@ int main(void){
 		 break;
 	   case 6:
 		 cout<<"----请输入你要检索的元素标号：\t"<<endl;
-		 cin>>i;
+		 scanf("%d", &i);
 		 
                  if(ll->GetElem(i, res) == OK)
-		 	printf("\n----元素标号 %d ==> 值为 %d\n", i, res);     
+		 	printf("\n----元素标号 #%d ==> 值为 %d\n", i, res);     
 		 else
 			printf("\n----未找到元素！\n");
 
 		 getchar();getchar();
 		 break;
 	   case 7:
-		 //TODO: Find a way to express a node
-		 printf("\n----LocateElem功能待实现！\n");     
+
+		 cout<<"----请输入你要检索的元素值：\t"<<endl;
+		 scanf("%d", &d);
+
+		 if(ll->LocateElem(d) != NULL)
+			printf("\n----已找到元素 %d！\n", d);
+		 else
+			printf("\n----未找到元素！\n");
+    
 		 getchar();getchar();
 		 break;
 	   case 8:
 		 cout<<"----需要查询哪个元素的前驱节点？在此输入：\t"<<endl;
-		 cin>>i;
+		 scanf("%d", &i);
 		 
                  if(ll->PriorElem(i, res) == OK)
 		 	printf("\n----元素 %d 的前驱结点值为 %d\n", i, res);     
@@ -92,7 +104,7 @@ int main(void){
 		 break;
 	   case 9:
 		 cout<<"----需要查询哪个元素的后继节点？在此输入：\t"<<endl;
-		 cin>>i;
+		 scanf("%d", &i);
 		 
                  if(ll->PriorElem(i, res) == OK)
 		 	printf("\n----元素 %d 的后继结点值为 %d\n", i, res);     
@@ -102,14 +114,45 @@ int main(void){
 		 getchar();getchar();
 		 break;
 	   case 10:
-		 printf("\n----ListInsert功能待实现！\n");     
+		 isEmptyAtFirst = ll->ListEmpty();
+
+		 if(isEmptyAtFirst)
+		 {
+			cout<<"【注意】当前链表为空，即将插入第一个结点。输入第一个结点的值："<<endl;
+			scanf("%d", &d);
+
+			if(ll->ListInsert(0, d) == OK)
+					printf("\n----第一个元素 %d 已成功插入！\n", d);     
+   
+			else
+				printf("\n----元素 %d 插入失败！\n", d);  
+		 }
+		 else
+		 {
+		 	 cout<<"---接下来开始插入链表元素。输入格式：要插入的位置  元素值"<<endl;
+			 scanf("%d%d", &i, &d);
+
+			 if(ll->ListInsert(i, d) == OK)
+				printf("\n----元素 %d 已成功插入到结点 #%d 之前！\n", d, i);     
+			 else
+				printf("\n----元素 %d 插入失败！\n", d);     
+		 }
+
 		 getchar();getchar();
 		 break;
 	   case 11:
-		 printf("\n----ListDelete功能待实现！\n");     
+		 cout<<"---接下来开始删除链表元素。输入格式：删除的结点标号"<<endl;
+		 scanf("%d", &i);
+
+		 if(ll->ListDelete(i, res) == OK)
+			printf("\n----成功删除结点 #%d，该元素的值为 %d！\n", i, res);     
+		 else
+			printf("\n----结点 #%d 删除失败！\n", i);    
+  
 		 getchar();getchar();
 		 break;
 	   case 12:  
+		 cout<<"================ 打印输出线性表 ================"<<endl;
 		 if(!ll->ListTrabverse()) printf("*** 线性表是空表！\n");
 		 getchar();getchar();
 		 break;
