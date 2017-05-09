@@ -121,9 +121,11 @@ int main(void){
 			cout<<"【注意】当前链表为空，即将插入第一个结点。输入第一个结点的值："<<endl;
 			scanf("%d", &d);
 
-			if(ll->ListInsert(0, d) == OK)
+			res = ll->ListInsert(0, d);
+			if(res == OK)
 					printf("\n----第一个元素 %d 已成功插入！\n", d);     
-   
+			else if(res == INFEASIBLE)
+					printf("\n---链表已被销毁，或未初始化。请先执行 InitList! \n", d);     
 			else
 				printf("\n----元素 %d 插入失败！\n", d);  
 		 }
@@ -153,7 +155,12 @@ int main(void){
 		 break;
 	   case 12:  
 		 cout<<"================ 打印输出线性表 ================"<<endl;
-		 if(!ll->ListTrabverse()) printf("*** 线性表是空表！\n");
+		 res = ll->ListTrabverse();
+		 if(!res)
+		 	 printf("*** 线性表是空表！\n");
+		 else if(res == INFEASIBLE)
+		 	 printf("\n---链表已被销毁，或未初始化。请先执行 InitList! \n", d);  
+			     
 		 getchar();getchar();
 		 break;
 	   case 0:

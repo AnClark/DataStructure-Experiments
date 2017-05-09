@@ -18,8 +18,12 @@ status LinkedListClass::InitList(){
 status LinkedListClass::DestroyList(){
     Node *p, *q;    //p points to current node to operate, q points to node to delete.
 
+	// Quit if linked list already destroyed
+	if(LIST_DESTROYED)
+		return ERROR;
+
     // Init
-    p=LHead->next;
+    p=LHead;
 
     /******** STAGE 1: Delete nodes with data ********/
     // METHOD: Scan a node, then remove it.
@@ -30,23 +34,26 @@ status LinkedListClass::DestroyList(){
         delete q;
     }
 
-    /******** STAGE 2: Delete header nodes ********/
-    delete LHead->next;
+    /******** STAGE 2: Delete header node ********/
     delete LHead;
+    LHead = NULL;
 
-    // TODO: Fix incorrect return success level
-/**
+
     if(!LHead)
         return OK;
     else
         return ERROR;
-*/
+
 }
 
 
 status LinkedListClass::ClearList()
 {
     Node *p, *q;    //p points to current node to operate, q points to node to delete.
+
+	// Quit if linked list already destroyed
+	if(LIST_DESTROYED)
+		return ERROR;
 
     // Init
     p=LHead->next;
@@ -70,6 +77,8 @@ status LinkedListClass::ClearList()
 
 bool LinkedListClass::ListEmpty()
 {
+	if(LIST_DESTROYED)
+		return true;
     if(LHead->next->next == NULL)
         return true;
     else
@@ -81,6 +90,11 @@ int LinkedListClass::ListLength()
 {
     int len = 0;
     Node *p;
+    
+	// Quit if linked list already destroyed
+	if(LIST_DESTROYED)
+		return ERROR;    
+    
     p=LHead->next->next;
 
     while(p != NULL){
@@ -226,6 +240,10 @@ status LinkedListClass::ListInsert(int i, ElemType e)
     Node *p, *f;       //p points to current node to operate, f refers to new node.
     int j = 0;        //Current ID of node
 
+	//Return INFEASIBLE if linked list is destroyed
+	if(LIST_DESTROYED)
+		return INFEASIBLE;
+
     //Init
     p=LHead->next;
 
@@ -275,6 +293,10 @@ status LinkedListClass::ListDelete(int i, ElemType & e)
     Node *p, *q;    //p points to current node to operate, q points to node to delete.
     int j = 0;    //Current ID of node
 
+	// Quit if linked list already destroyed
+	if(LIST_DESTROYED)
+		return ERROR;
+
     //Init
     p=LHead->next;
 
@@ -306,9 +328,13 @@ status LinkedListClass::ListDelete(int i, ElemType & e)
 status LinkedListClass::PrintList()
 {
     Node *p;      //p points to current node to operate
-   
-    //Return error if linked list is empty
-    if(LHead->next->next == NULL)
+
+	//Return INFEASIBLE if linked list is destroyed
+	if(LIST_DESTROYED)
+		return INFEASIBLE;
+  
+    //Return error if linked list is empty or destroyed
+    if(ListEmpty())
         return ERROR;
  
     //Init
@@ -326,7 +352,7 @@ status LinkedListClass::PrintList()
 }
 
 
-status LinkedListClass::ListTrabverse()  //简化过
+status LinkedListClass::ListTrabverse()  //简化过 
 /**** Actually, this function does the same as PrintList() ****/
 {
     PrintList();
