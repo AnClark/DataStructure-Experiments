@@ -2,13 +2,13 @@
 
 status SequentialListClass::InitList()
 {
-	SQList.elem = malloc(LIST_INIT_SIZE * sizeof(ElemType));
+	SQList.elem = (ElemType *) malloc(LIST_INIT_SIZE * sizeof(ElemType));
 
 	if (!SQList.elem)
 		return OVERFLOW;
 
-	L.length = 0;
-	L.listSize = LIST_INIT_SIZE;
+	SQList.length = 0;
+	SQList.listSize = LIST_INIT_SIZE;
 	return OK;
 }
 
@@ -33,6 +33,7 @@ status SequentialListClass::ClearList()
 
 	for (int i = 0; i < SQList.length; i++)
 		SQList.elem[i] = 0;
+	SQList.length = 0;
 
 	return OK;
 }
@@ -73,7 +74,7 @@ status SequentialListClass::GetElem(int i, ElemType & e)
 		return INFEASIBLE;
 
 	// Situation 3: Input is right
-	e = SQList[i - 1];
+	e = SQList.elem[i - 1];
 	return OK;
 }
 
@@ -82,40 +83,75 @@ index SequentialListClass::LocateElem(ElemType e)	// 简化过
 {
 	if (LISTNULL)
 		return ERROR;
-    
-    int idx=0;
-	while(SQList.elem[idx] != e)
-	    idx++;
-	    
-	if(idx >= SQList.length)
-	    return INFEASIBLE;
+
+	int idx = 0;
+	while (SQList.elem[idx] != e)
+		idx++;
+
+	if (idx >= SQList.length)
+		return INFEASIBLE;
 	else
-	    return idx;
-	    
+		return idx;
+
 }
 
 
 status SequentialListClass::PriorElem(ElemType cur, ElemType & pre_e)
 {
-
+	if (LISTNULL)
+		return ERROR;
 }
 
 
 status SequentialListClass::NextElem(ElemType cur, ElemType & next_e)
 {
-
+	if (LISTNULL)
+		return ERROR;
 }
 
 
 status SequentialListClass::ListInsert(int i, ElemType e)
+// NOTICE: Here we assert that the first index is 1.
 {
+	if (LISTNULL)
+		return ERROR;
 
+	// Check if i illegal or not
+	if (i < 1 || i > SQList.length + 1)
+		return ERROR;
+
+	// Situation 1: If length>=listsize, we should allocate more spaces first.
+	if (SQList.length >= SQList.listSize)
+	{
+		ElemType *newBase =
+			(ElemType * ) realloc(SQList.elem,(SQList.listSize+LISTINCREMENT) * sizeof(ElemType));
+		if (!newBase)
+			return OVERFLOW;
+		SQList.elem = newBase;
+		SQList.listSize += LISTINCREMENT;
+	}
+
+	// If length<listsize, or after allocating more spaces, we can directly
+	// insert.
+	for (int j = i - 1; j < SQList.length; j++)
+	{
+		SQList.elem[j + 1] = SQList.elem[j];
+	}
+	SQList.elem[i - 1] = e;
+	SQList.length++;
+	
+	return OK;
 }
 
 
 status SequentialListClass::ListDelete(int i, ElemType & e)
 {
-
+	if (LISTNULL)
+		return ERROR;
+		
+		
+	// Code preserve
+	SQList.length--;
 }
 
 
@@ -125,9 +161,12 @@ status SequentialListClass::PrintList()
 	if (LISTNULL)
 		return ERROR;
 
+	if (ListEmpty())
+		return FALSE;
+
 	for (int i = 0; i < SQList.length; i++)
-		cout << SQList.elem[i] << "  ";
-	cout << endl;
+		printf("%d  ", SQList.elem[i]);
+	printf("\n");
 
 	return OK;
 }

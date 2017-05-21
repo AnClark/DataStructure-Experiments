@@ -8,7 +8,7 @@
 #include<stdio.h>
 #include<string.h>
 #include<malloc.h>
-// #include<math.h>
+
 
 #define TRUE 1
 #define FALSE 0
@@ -19,7 +19,7 @@
 
 typedef int ElemType;
 typedef int status;
-typedef int index;
+#define index int
 
 // Sequential list definition
 #define LIST_INIT_SIZE 100
@@ -29,7 +29,7 @@ struct SequentialList
 	ElemType *elem;				// Base addr of storage
 	int length;					// Current length
 	int listSize;				// Current allocated capacity
-}
+};
 
 class SequentialListClass
 {
@@ -73,3 +73,4 @@ class SequentialListClass
 	}
 
 };
+
