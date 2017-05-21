@@ -1,7 +1,7 @@
 /**
   基于单链表存储结构的线性表基本操作
   Basic procedures to manage sequential list
-  
+
   Basic class definition
 */
 
@@ -16,6 +16,7 @@
 #define ERROR -256
 #define INFEASIBLE -1
 #define OVERFLOW -2
+#define ILLEGALINPUT -3
 
 typedef int ElemType;
 typedef int status;
@@ -38,10 +39,10 @@ class SequentialListClass
 
 	// Define a SQList instantation
 	SequentialList SQList;
-	
+
 	// Check if list NULL
 	#define LISTNULL SQList.elem == NULL
-	
+
 	// Basic operation functions
 	status InitList();
 	status DestroyList();

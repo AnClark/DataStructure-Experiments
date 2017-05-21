@@ -118,9 +118,9 @@ status SequentialListClass::ListInsert(int i, ElemType e)
 
 	// Check if i illegal or not
 	if (i < 1 || i > SQList.length + 1)
-		return ERROR;
+		return ILLEGALINPUT;
 
-	// Situation 1: If length>=listsize, we should allocate more spaces first.
+	// Situation 1: If length >= listsize, we should allocate more spaces first.
 	if (SQList.length >= SQList.listSize)
 	{
 		ElemType *newBase =
@@ -133,13 +133,14 @@ status SequentialListClass::ListInsert(int i, ElemType e)
 
 	// If length<listsize, or after allocating more spaces, we can directly
 	// insert.
-	for (int j = i - 1; j < SQList.length; j++)
+	int idx = i - 1;
+	for (int j = SQList.length - 1; j >= idx; j--)
 	{
 		SQList.elem[j + 1] = SQList.elem[j];
 	}
-	SQList.elem[i - 1] = e;
+	SQList.elem[idx] = e;
 	SQList.length++;
-	
+
 	return OK;
 }
 
@@ -148,10 +149,28 @@ status SequentialListClass::ListDelete(int i, ElemType & e)
 {
 	if (LISTNULL)
 		return ERROR;
-		
-		
-	// Code preserve
+
+    if (ListEmpty())
+        return INFEASIBLE;
+
+    // Check if your input illegal or not
+    if(i < 1 || i > SQList.length + 1)
+        return ILLEGALINPUT;
+
+    // Now start deleting
+    // Locate to the item to input, then move
+    int j, idx=i - 1;
+
+    // Return the value of item to delete
+    e = SQList.elem[idx];
+
+    // Delete procedure
+    for(j=idx; j<SQList.length; j++)
+        SQList.elem[j] = SQList.elem[j+1];
+    SQList.elem[j] = 0;
 	SQList.length--;
+
+	return OK;
 }
 
 
@@ -172,7 +191,7 @@ status SequentialListClass::PrintList()
 }
 
 
-status SequentialListClass::ListTrabverse()	// 简化过 
+status SequentialListClass::ListTrabverse()	// 简化过
 /**** Actually, this function does the same as PrintList() ****/
 {
 	return PrintList();

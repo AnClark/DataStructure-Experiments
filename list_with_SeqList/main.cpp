@@ -16,14 +16,14 @@ int main(void){
   // d - Node data
   // res - Result or status value of function
   int i, d, res = 0;
-  bool isEmptyAtFirst;		
+  bool isEmptyAtFirst;
 
   int op=1;
   while(op){
 	system("cls");		// On Windows
 	system("clear");	// On Linux
 	printf("\n\n");
-        printf("      é¡ºåºç»“æ„çº¿æ€§è¡¨åŸºæœ¬æ“ä½œæ¼”ç¤ºç¨‹åº - ä¸»èœå• \n");
+        printf("      Ë³Ğò½á¹¹ÏßĞÔ±í»ù±¾²Ù×÷ÑİÊ¾³ÌĞò - Ö÷²Ëµ¥ \n");
 	printf("      Menu for Sequential List Table On Sequence Structure \n");
 	printf("-------------------------------------------------\n");
 	printf("    	  1. InitList       7. LocateElem\n");
@@ -34,83 +34,83 @@ int main(void){
 	printf("    	  6. GetElem       12. ListTrabverse\n");
 	printf("    	  0. Exit\n");
 	printf("-------------------------------------------------\n");
-	printf("    è¯·é€‰æ‹©ä½ çš„æ“ä½œ[0~12]:");
+	printf("    ÇëÑ¡ÔñÄãµÄ²Ù×÷[0~12]:");
 	scanf("%d",&op);
 	printf("\n\n");
     switch(op){
 	   case 1:
                  /** NOTICE: InitList() is called once by constructor. **/
-		 if(ll->InitList()==OK) printf("çº¿æ€§è¡¨åˆ›å»ºæˆåŠŸï¼\n");
-		     else printf("çº¿æ€§è¡¨åˆ›å»ºå¤±è´¥ï¼\n");
+		 if(ll->InitList()==OK) printf("ÏßĞÔ±í´´½¨³É¹¦£¡\n");
+		     else printf("ÏßĞÔ±í´´½¨Ê§°Ü£¡\n");
 		 getchar();getchar();
 		 break;
 	   case 2:
                  ll->DestroyList();
-		 printf("\n----DestroyList å·²ç»è°ƒç”¨ï¼\n");     
+		 printf("\n----DestroyList ÒÑ¾­µ÷ÓÃ£¡\n");
 		 getchar();getchar();
 		 break;
 	   case 3:
 		 res = ll->ClearList();
 		 if(res == OK)
-		 	printf("\n----çº¿æ€§è¡¨å·²æ¸…ç©ºï¼\n");     
+		 	printf("\n----ÏßĞÔ±íÒÑÇå¿Õ£¡\n");
 		 else
-			printf("\n----çº¿æ€§è¡¨æ¸…ç©ºå¤±è´¥ï¼\n");
+			printf("\n----ÏßĞÔ±íÇå¿ÕÊ§°Ü£¡\n");
 		 getchar();getchar();
 		 break;
 	   case 4:
                  if(ll->ListEmpty())
-		 	printf("\n----å½“å‰çº¿æ€§è¡¨ã€ä¸ºç©ºã€‘ï¼\n"); 
+		 	printf("\n----µ±Ç°ÏßĞÔ±í¡¾Îª¿Õ¡¿£¡\n");
 		 else
-			printf("\n----å½“å‰çº¿æ€§è¡¨ã€éç©ºã€‘ï¼\n"); 
+			printf("\n----µ±Ç°ÏßĞÔ±í¡¾·Ç¿Õ¡¿£¡\n");
 		 getchar();getchar();
 		 break;
 	   case 5:
-		 printf("\n----çº¿æ€§è¡¨é•¿åº¦ä¸ºï¼š%d\n", ll->ListLength());     
+		 printf("\n----ÏßĞÔ±í³¤¶ÈÎª£º%d\n", ll->ListLength());
 		 getchar();getchar();
 		 break;
 	   case 6:
-		 cout<<"----è¯·è¾“å…¥ä½ è¦æ£€ç´¢çš„å…ƒç´ æ ‡å·ï¼š\t"<<endl;
+		 cout<<"----ÇëÊäÈëÄãÒª¼ìË÷µÄÔªËØ±êºÅ£º\t"<<endl;
 		 scanf("%d", &i);
-		 
-                 if(ll->GetElem(i, res) == OK)
-		 	printf("\n----å…ƒç´ æ ‡å· #%d ==> å€¼ä¸º %d\n", i, res);     
+
+         if(ll->GetElem(i, res) == OK)
+		 	printf("\n----ÔªËØ±êºÅ #%d ==> ÖµÎª %d\n", i, res);
 		 else
-			printf("\n----æœªæ‰¾åˆ°å…ƒç´ ï¼\n");
+			printf("\n----Î´ÕÒµ½ÔªËØ£¡\n");
 
 		 getchar();getchar();
 		 break;
 	   case 7:
 
-		 cout<<"----è¯·è¾“å…¥ä½ è¦æ£€ç´¢çš„å…ƒç´ å€¼ï¼š\t"<<endl;
+		 cout<<"----ÇëÊäÈëÄãÒª¼ìË÷µÄÔªËØÖµ£º\t"<<endl;
 		 scanf("%d", &d);
 
-		 if(ll->LocateElem(d) != NULL)
-			printf("\n----å·²æ‰¾åˆ°å…ƒç´  %dï¼\n", d);
+		 if(ll->LocateElem(d) > 0)
+			printf("\n----ÒÑÕÒµ½ÔªËØ %d£¡\n", d);
 		 else
-			printf("\n----æœªæ‰¾åˆ°å…ƒç´ ï¼\n");
-    
+			printf("\n----Î´ÕÒµ½ÔªËØ£¡\n");
+
 		 getchar();getchar();
 		 break;
 	   case 8:
-		 cout<<"----éœ€è¦æŸ¥è¯¢å“ªä¸ªå…ƒç´ çš„å‰é©±èŠ‚ç‚¹ï¼Ÿåœ¨æ­¤è¾“å…¥ï¼š\t"<<endl;
+		 cout<<"----ĞèÒª²éÑ¯ÄÄ¸öÔªËØµÄÇ°Çı½Úµã£¿ÔÚ´ËÊäÈë£º\t"<<endl;
 		 scanf("%d", &i);
-		 
-                 if(ll->PriorElem(i, res) == OK)
-		 	printf("\n----å…ƒç´  %d çš„å‰é©±ç»“ç‚¹å€¼ä¸º %d\n", i, res);     
+
+         if(ll->PriorElem(i, res) == OK)
+		 	printf("\n----ÔªËØ %d µÄÇ°Çı½áµãÖµÎª %d\n", i, res);
 		 else
-			printf("\n----æ“ä½œå¤±è´¥ï¼Œè¯¥å…ƒç´ ä¸åœ¨çº¿æ€§è¡¨ä¸­ï¼Œæˆ–ä¸ºé¦–ä¸ªå…ƒç´ ï¼\n");
-    
+			printf("\n----²Ù×÷Ê§°Ü£¬¸ÃÔªËØ²»ÔÚÏßĞÔ±íÖĞ£¬»òÎªÊ×¸öÔªËØ£¡\n");
+
 		 getchar();getchar();
 		 break;
 	   case 9:
-		 cout<<"----éœ€è¦æŸ¥è¯¢å“ªä¸ªå…ƒç´ çš„åç»§èŠ‚ç‚¹ï¼Ÿåœ¨æ­¤è¾“å…¥ï¼š\t"<<endl;
+		 cout<<"----ĞèÒª²éÑ¯ÄÄ¸öÔªËØµÄºó¼Ì½Úµã£¿ÔÚ´ËÊäÈë£º\t"<<endl;
 		 scanf("%d", &i);
-		 
+
                  if(ll->NextElem(i, res) == OK)
-		 	printf("\n----å…ƒç´  %d çš„åç»§ç»“ç‚¹å€¼ä¸º %d\n", i, res);     
+		 	printf("\n----ÔªËØ %d µÄºó¼Ì½áµãÖµÎª %d\n", i, res);
 		 else
-			printf("\n----æ“ä½œå¤±è´¥ï¼Œè¯¥å…ƒç´ ä¸åœ¨çº¿æ€§ä¸­ï¼Œæˆ–ä¸ºæœ€åä¸€ä¸ªå…ƒç´ ï¼\n");
- 
+			printf("\n----²Ù×÷Ê§°Ü£¬¸ÃÔªËØ²»ÔÚÏßĞÔÖĞ£¬»òÎª×îºóÒ»¸öÔªËØ£¡\n");
+
 		 getchar();getchar();
 		 break;
 	   case 10:
@@ -118,56 +118,69 @@ int main(void){
 
 		 if(isEmptyAtFirst)
 		 {
-			cout<<"ã€æ³¨æ„ã€‘å½“å‰çº¿æ€§è¡¨ä¸ºç©ºï¼Œå³å°†æ’å…¥ç¬¬ä¸€ä¸ªç»“ç‚¹ã€‚è¾“å…¥ç¬¬ä¸€ä¸ªç»“ç‚¹çš„å€¼ï¼š"<<endl;
+			cout<<"¡¾×¢Òâ¡¿µ±Ç°ÏßĞÔ±íÎª¿Õ£¬¼´½«²åÈëµÚÒ»¸ö½áµã¡£ÊäÈëµÚÒ»¸ö½áµãµÄÖµ£º"<<endl;
 			scanf("%d", &d);
 
 			res = ll->ListInsert(1, d);
 			if(res == OK)
-					printf("\n----ç¬¬ä¸€ä¸ªå…ƒç´  %d å·²æˆåŠŸæ’å…¥ï¼\n", d);     
+					printf("\n----µÚÒ»¸öÔªËØ %d ÒÑ³É¹¦²åÈë£¡\n", d);
 			else if(res == ERROR)
-					printf("\n---çº¿æ€§è¡¨å·²è¢«é”€æ¯ï¼Œæˆ–æœªåˆå§‹åŒ–ã€‚è¯·å…ˆæ‰§è¡Œ InitList! \n", d);     
+					printf("\n---ÏßĞÔ±íÒÑ±»Ïú»Ù£¬»òÎ´³õÊ¼»¯¡£ÇëÏÈÖ´ĞĞ InitList! \n", d);
+            else if(res == ILLEGALINPUT)
+                    printf("\n---ÊäÈëµÄiÖµ²»ºÏ·¨£¡\n");
 			else
-				printf("\n----å…ƒç´  %d æ’å…¥å¤±è´¥ï¼\n", d);  
+				printf("\n----ÔªËØ %d ²åÈëÊ§°Ü£¡\n", d);
 		 }
 		 else
 		 {
-		 	 cout<<"---æ¥ä¸‹æ¥å¼€å§‹æ’å…¥çº¿æ€§è¡¨å…ƒç´ ã€‚è¾“å…¥æ ¼å¼ï¼šè¦æ’å…¥çš„ä½ç½®  å…ƒç´ å€¼"<<endl;
+		 	 cout<<"---½ÓÏÂÀ´¿ªÊ¼²åÈëÏßĞÔ±íÔªËØ¡£ÊäÈë¸ñÊ½£ºÒª²åÈëµÄÎ»ÖÃ  ÔªËØÖµ"<<endl;
 			 scanf("%d%d", &i, &d);
 
 			 if(ll->ListInsert(i, d) == OK)
-				printf("\n----å…ƒç´  %d å·²æˆåŠŸæ’å…¥ï¼Œå‚è€ƒä½ç½®#%dï¼\n", d, i);     
+				printf("\n----ÔªËØ %d ÒÑ³É¹¦²åÈë£¬²Î¿¼Î»ÖÃ#%d£¡\n", d, i);
 			 else
-				printf("\n----å…ƒç´  %d æ’å…¥å¤±è´¥ï¼\n", d);     
+				printf("\n----ÔªËØ %d ²åÈëÊ§°Ü£¡\n", d);
 		 }
 
 		 getchar();getchar();
 		 break;
 	   case 11:
-		 cout<<"---æ¥ä¸‹æ¥å¼€å§‹åˆ é™¤çº¿æ€§è¡¨å…ƒç´ ã€‚è¾“å…¥æ ¼å¼ï¼šåˆ é™¤çš„å…ƒç´ æ ‡å·"<<endl;
+		 cout<<"---½ÓÏÂÀ´¿ªÊ¼É¾³ıÏßĞÔ±íÔªËØ¡£ÊäÈë¸ñÊ½£ºÉ¾³ıµÄÔªËØ±êºÅ"<<endl;
 		 scanf("%d", &i);
 
-		 if(ll->ListDelete(i, res) == OK)
-			printf("\n----æˆåŠŸåˆ é™¤å…ƒç´  #%dï¼Œè¯¥å…ƒç´ çš„å€¼ä¸º %dï¼\n", i, res);     
-		 else
-			printf("\n----å…ƒç´  #%d åˆ é™¤å¤±è´¥ï¼\n", i);    
-  
+		 switch(ll->ListDelete(i, res))
+          {
+        case OK:
+            printf("\n----³É¹¦É¾³ıÔªËØ #%d£¬¸ÃÔªËØµÄÖµÎª %d¡£\n", i, res);
+            break;
+        case INFEASIBLE:
+            printf("\n---ÕÒ²»µ½´ıÉ¾³ıµÄÔªËØ£¡\n");
+            break;
+        case ILLEGALINPUT:
+            printf("\n---ÊäÈëµÄiÖµ²»ºÏ·¨£¡\n");
+            break;
+        default:
+            printf("\n----ÔªËØ #%d É¾³ıÊ§°Ü£¡\n", i);
+          }
+
+
 		 getchar();getchar();
 		 break;
-	   case 12:  
-		 cout<<"================ æ‰“å°è¾“å‡ºçº¿æ€§è¡¨ ================"<<endl;
+	   case 12:
+		 cout<<"================ ´òÓ¡Êä³öÏßĞÔ±í ================"<<endl;
 		 res = ll->ListTrabverse();
 		 if(res == FALSE)
-		 	 printf("*** çº¿æ€§è¡¨æ˜¯ç©ºè¡¨ï¼\n");
+		 	 printf("*** ÏßĞÔ±íÊÇ¿Õ±í£¡\n");
 		 else if(res == ERROR)
-		 	 printf("\n---çº¿æ€§å·²è¢«é”€æ¯ï¼Œæˆ–æœªåˆå§‹åŒ–ã€‚è¯·å…ˆæ‰§è¡Œ InitList! \n", d);  
-			     
+		 	 printf("\n---ÏßĞÔÒÑ±»Ïú»Ù£¬»òÎ´³õÊ¼»¯¡£ÇëÏÈÖ´ĞĞ InitList! \n", d);
+
 		 getchar();getchar();
 		 break;
 	   case 0:
          break;
 	}//end of switch
   }//end of while
-  printf("æ¬¢è¿ä¸‹æ¬¡å†ä½¿ç”¨æœ¬ç³»ç»Ÿï¼\n");
+  printf("»¶Ó­ÏÂ´ÎÔÙÊ¹ÓÃ±¾ÏµÍ³£¡\n");
 
   return 0;
 }//end of main()

@@ -2,4 +2,7 @@
 *.docx#
 gmon.out
 *.bak
+*.exe
+*.o
+
 
