@@ -91,7 +91,7 @@ index SequentialListClass::LocateElem(ElemType e)	// 简化过
 	if (idx >= SQList.length)
 		return INFEASIBLE;
 	else
-		return idx;
+		return idx+1;
 
 }
 
@@ -100,6 +100,16 @@ status SequentialListClass::PriorElem(ElemType cur, ElemType & pre_e)
 {
 	if (LISTNULL)
 		return ERROR;
+
+
+    for(int i = 0; i < SQList.length; i++){
+        if(SQList.elem[i] == cur  &&  i >= 1){
+            pre_e = SQList.elem[i-1];
+            return OK;
+        }
+    }
+
+    return INFEASIBLE;
 }
 
 
@@ -107,6 +117,15 @@ status SequentialListClass::NextElem(ElemType cur, ElemType & next_e)
 {
 	if (LISTNULL)
 		return ERROR;
+
+    for(int i = 0; i < SQList.length; i++){
+        if(SQList.elem[i] == cur  &&  i < SQList.length - 1){
+            next_e = SQList.elem[i+1];
+            return OK;
+        }
+    }
+
+    return INFEASIBLE;
 }
 
 

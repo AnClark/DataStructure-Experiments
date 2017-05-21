@@ -58,14 +58,17 @@ int main(void){
 		 getchar();getchar();
 		 break;
 	   case 4:
-                 if(ll->ListEmpty())
+         if(ll->ListEmpty())
 		 	printf("\n----当前线性表【为空】！\n");
 		 else
 			printf("\n----当前线性表【非空】！\n");
 		 getchar();getchar();
 		 break;
 	   case 5:
-		 printf("\n----线性表长度为：%d\n", ll->ListLength());
+         if(ll->ListLength() != ERROR)
+            printf("\n----线性表长度为：%d\n", ll->ListLength());
+         else
+            printf("\n----长度查询出错，线性表已被销毁！\n");
 		 getchar();getchar();
 		 break;
 	   case 6:
@@ -84,10 +87,13 @@ int main(void){
 		 cout<<"----请输入你要检索的元素值：\t"<<endl;
 		 scanf("%d", &d);
 
-		 if(ll->LocateElem(d) > 0)
-			printf("\n----已找到元素 %d！\n", d);
+         res = ll->LocateElem(d);
+		 if(res >= 0)
+			printf("\n----已找到元素 %d， 位于 #%d！\n", d, res);
+         else if(res == INFEASIBLE)
+            printf("\n----未找到元素！\n");
 		 else
-			printf("\n----未找到元素！\n");
+			printf("\n----查询时出错——线性表已被销毁！\n");
 
 		 getchar();getchar();
 		 break;
@@ -106,10 +112,10 @@ int main(void){
 		 cout<<"----需要查询哪个元素的后继节点？在此输入：\t"<<endl;
 		 scanf("%d", &i);
 
-                 if(ll->NextElem(i, res) == OK)
+         if(ll->NextElem(i, res) == OK)
 		 	printf("\n----元素 %d 的后继结点值为 %d\n", i, res);
 		 else
-			printf("\n----操作失败，该元素不在线性中，或为最后一个元素！\n");
+			printf("\n----操作失败，该元素不在线性表中，或为最后一个元素！\n");
 
 		 getchar();getchar();
 		 break;
