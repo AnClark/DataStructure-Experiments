@@ -1,6 +1,6 @@
 *~
 *.docx#
-gmon.out
+*.out
 *.bak
 *.exe
 *.o

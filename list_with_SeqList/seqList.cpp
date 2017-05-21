@@ -25,6 +25,7 @@ status SequentialListClass::DestroyList()
 	// pointer value?
 }
 
+
 status SequentialListClass::ClearList()
 {
 	if (LISTNULL)
@@ -73,7 +74,7 @@ status SequentialListClass::GetElem(int i, ElemType & e)
 	if (i <= 0 || i > SQList.length)
 		return INFEASIBLE;
 
-	// Situation 3: Input is right
+	// Situation 3: Input value i is legal
 	e = SQList.elem[i - 1];
 	return OK;
 }
@@ -103,7 +104,8 @@ status SequentialListClass::PriorElem(ElemType cur, ElemType & pre_e)
 
 
     for(int i = 0; i < SQList.length; i++){
-        if(SQList.elem[i] == cur  &&  i >= 1){
+        if(SQList.elem[i] == cur  &&  i >= 1)       //CAUTION: Watch out for overflow!
+        {
             pre_e = SQList.elem[i-1];
             return OK;
         }
@@ -119,7 +121,8 @@ status SequentialListClass::NextElem(ElemType cur, ElemType & next_e)
 		return ERROR;
 
     for(int i = 0; i < SQList.length; i++){
-        if(SQList.elem[i] == cur  &&  i < SQList.length - 1){
+        if(SQList.elem[i] == cur  &&  i < SQList.length - 1)        //CAUTION: Watch out for overflow!
+        {
             next_e = SQList.elem[i+1];
             return OK;
         }
@@ -130,7 +133,9 @@ status SequentialListClass::NextElem(ElemType cur, ElemType & next_e)
 
 
 status SequentialListClass::ListInsert(int i, ElemType e)
-// NOTICE: Here we assert that the first index is 1.
+/** NOTICE: Here we assert that the first index is 1.
+            So we need a separate variable (idx) to map our input with the item in list.
+**/
 {
 	if (LISTNULL)
 		return ERROR;
@@ -139,7 +144,7 @@ status SequentialListClass::ListInsert(int i, ElemType e)
 	if (i < 1 || i > SQList.length + 1)
 		return ILLEGALINPUT;
 
-	// Situation 1: If length >= listsize, we should allocate more spaces first.
+	/** Situation 1: If length >= listsize, we should allocate more spaces first. **/
 	if (SQList.length >= SQList.listSize)
 	{
 		ElemType *newBase =
@@ -150,21 +155,23 @@ status SequentialListClass::ListInsert(int i, ElemType e)
 		SQList.listSize += LISTINCREMENT;
 	}
 
-	// If length<listsize, or after allocating more spaces, we can directly
-	// insert.
-	int idx = i - 1;
+	/** Situation 2: If length<listsize, or after allocating more spaces, we can directly insert. **/
+	int idx = i - 1;        // Map our input with item in the list
+	// Move items to right since insert point to make room for the new item
 	for (int j = SQList.length - 1; j >= idx; j--)
-	{
 		SQList.elem[j + 1] = SQList.elem[j];
-	}
 	SQList.elem[idx] = e;
-	SQList.length++;
+
+	SQList.length++;        // Remember to update length!
 
 	return OK;
 }
 
 
 status SequentialListClass::ListDelete(int i, ElemType & e)
+/** NOTICE: Here we assert that the first index is 1.
+            So we need a separate variable (idx) to map our input with the item in list.
+**/
 {
 	if (LISTNULL)
 		return ERROR;
@@ -184,10 +191,12 @@ status SequentialListClass::ListDelete(int i, ElemType & e)
     e = SQList.elem[idx];
 
     // Delete procedure
+    // Move items to left since insert point to squeeze the room of item to remove
     for(j=idx; j<SQList.length; j++)
         SQList.elem[j] = SQList.elem[j+1];
     SQList.elem[j] = 0;
-	SQList.length--;
+
+	SQList.length--;        // Remember to update length!
 
 	return OK;
 }
