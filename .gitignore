@@ -1,3 +1,5 @@
 *~
 *.docx#
 gmon.out
+*.bak
+
