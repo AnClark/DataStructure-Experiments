@@ -137,7 +137,6 @@ status LinkedListClass::GetElem(int i,ElemType & e)
 
 Node* LinkedListClass::LocateElem(ElemType e) //简化过
 //NOTICE: I directly return address value in int!
-//       G++ on Ubuntu 13.10 doesn't support treating a struct as return type!
 {
     Node *p;    //p points to current node to operate
 
