@@ -316,10 +316,14 @@ status LinkedListClass::ListDelete(int i, ElemType & e)
     e=q->data;      // Dump the node's value to var "e"
     delete q;
     
-    if(!q)
+    /*
+	if(!q)
         return OK;
     else
         return ERROR;
+	*/
+	// NOTICE: keyword "delete" will just free the node's space, but not reset its address value!
+	return OK;
 }
 
 
